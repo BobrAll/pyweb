@@ -1,0 +1,42 @@
+name: Deploy MkDocs to GitVerse Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  NO_MKDOCS_2_WARNING: 1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Build site
+        run: mkdocs build --strict
+
+      - name: Upload Pages artifact
+        uses: upload-pages-artifact
+        with:
+          path: site/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitVerse Pages
+        uses: deploy-pages
