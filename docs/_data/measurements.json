@@ -1,0 +1,8 @@
+{
+  "cold_build": {"raw": [0, 0, 0], "median": 0, "mean": 0, "min": 0, "max": 0, "stdev": 0},
+  "cold_pip": {"raw": [0, 0, 0], "median": 0, "mean": 0, "min": 0, "max": 0, "stdev": 0},
+  "warm_build": {"raw": [0, 0, 0], "median": 0, "mean": 0, "min": 0, "max": 0, "stdev": 0},
+  "warm_pip": {"raw": [0, 0, 0], "median": 0, "mean": 0, "min": 0, "max": 0, "stdev": 0},
+  "site_size_kb": {"raw": [0, 0, 0], "median": 0, "mean": 0, "min": 0, "max": 0, "stdev": 0},
+  "site_files": {"raw": [0, 0, 0], "median": 0, "mean": 0, "min": 0, "max": 0, "stdev": 0}
+}
