@@ -2,14 +2,59 @@ name: Deploy MkDocs to GitVerse Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [ '**' ]
   workflow_dispatch:
 
 env:
   NO_MKDOCS_2_WARNING: 1
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Check Markdown links
+        run: |
+          python - <<'PY'
+          import re
+          import sys
+          from pathlib import Path
+          failures = []
+          for path in [Path("README.md"), *Path("docs").rglob("*.md")]:
+              text = path.read_text(encoding="utf-8")
+              for match in re.finditer(r"\[[^\]]+\]\(([^)]+)\)", text):
+                  target = match.group(1).split("#", 1)[0].strip()
+                  if not target or "://" in target or target.startswith(("mailto:", "#")):
+                      continue
+                  candidate = (path.parent / target).resolve()
+                  if not candidate.exists():
+                      failures.append(f"{path}:{match.start()}: {target}")
+          if failures:
+              print("\n".join(failures))
+              sys.exit(1)
+          PY
+
+      - name: Check spelling
+        run: codespell README.md docs
+
+      - name: Strict build
+        run: mkdocs build --strict
+
   build:
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -36,6 +81,7 @@ jobs:
 
   deploy:
     needs: build
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitVerse Pages
