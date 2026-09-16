@@ -1,0 +1,219 @@
+name: Measure build times
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  NO_MKDOCS_2_WARNING: 1
+
+jobs:
+  warm-prime:
+    name: Warm prime (fill pip cache)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Restore pip cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-warm-${{ hashFiles('requirements.txt') }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+  cold:
+    name: Cold run ${{ matrix.run }}
+    needs: warm-prime
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        run: [1, 2, 3]
+      max-parallel: 1
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies (cold)
+        run: |
+          python -m pip install --upgrade pip
+          START=$(date +%s)
+          pip install -r requirements.txt
+          END=$(date +%s)
+          echo "PIP_SECONDS=$((END - START))" >> $GITHUB_ENV
+
+      - name: Build site (cold)
+        run: |
+          START=$(date +%s)
+          mkdocs build --strict
+          END=$(date +%s)
+          echo "BUILD_SECONDS=$((END - START))" >> $GITHUB_ENV
+
+      - name: Collect metrics (cold)
+        run: |
+          echo "SITE_SIZE_KB=$(du -sk site | cut -f1)" >> $GITHUB_ENV
+          echo "SITE_FILES=$(find site -type f | wc -l)" >> $GITHUB_ENV
+
+      - name: Save result
+        run: |
+          python3 -c "
+          import json, os
+          json.dump({
+            'pip_seconds': int(os.environ['PIP_SECONDS']),
+            'build_seconds': int(os.environ['BUILD_SECONDS']),
+            'site_size_kb': int(os.environ['SITE_SIZE_KB']),
+            'site_files': int(os.environ['SITE_FILES']),
+          }, open('result.json', 'w'), indent=2)
+          "
+
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: cold-${{ matrix.run }}
+          path: result.json
+          retention-days: 7
+
+  warm:
+    name: Warm run ${{ matrix.run }}
+    needs: cold
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        run: [1, 2, 3]
+      max-parallel: 1
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Restore pip cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-warm-${{ hashFiles('requirements.txt') }}
+
+      - name: Install dependencies (warm)
+        run: |
+          python -m pip install --upgrade pip
+          START=$(date +%s)
+          pip install -r requirements.txt
+          END=$(date +%s)
+          echo "PIP_SECONDS=$((END - START))" >> $GITHUB_ENV
+
+      - name: Build site (warm)
+        run: |
+          START=$(date +%s)
+          mkdocs build --strict
+          END=$(date +%s)
+          echo "BUILD_SECONDS=$((END - START))" >> $GITHUB_ENV
+
+      - name: Collect metrics (warm)
+        run: |
+          echo "SITE_SIZE_KB=$(du -sk site | cut -f1)" >> $GITHUB_ENV
+          echo "SITE_FILES=$(find site -type f | wc -l)" >> $GITHUB_ENV
+
+      - name: Save result
+        run: |
+          python3 -c "
+          import json, os
+          json.dump({
+            'pip_seconds': int(os.environ['PIP_SECONDS']),
+            'build_seconds': int(os.environ['BUILD_SECONDS']),
+            'site_size_kb': int(os.environ['SITE_SIZE_KB']),
+            'site_files': int(os.environ['SITE_FILES']),
+          }, open('result.json', 'w'), indent=2)
+          "
+
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: warm-${{ matrix.run }}
+          path: result.json
+          retention-days: 7
+
+  aggregate:
+    name: Aggregate and commit
+    needs: [cold, warm]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts/
+
+      - name: Aggregate
+        run: |
+          python3 - <<'PY'
+          import json, glob, statistics
+          from pathlib import Path
+
+          def collect(prefix, field):
+              values = []
+              for f in sorted(glob.glob(f"artifacts/{prefix}-*/result.json")):
+                  with open(f) as fp:
+                      values.append(json.load(fp)[field])
+              if not values:
+                  return {"raw": [], "median": 0, "mean": 0, "min": 0, "max": 0, "stdev": 0}
+              return {
+                  "raw": values,
+                  "median": round(statistics.median(values), 1),
+                  "mean": round(statistics.mean(values), 1),
+                  "min": min(values),
+                  "max": max(values),
+                  "stdev": round(statistics.stdev(values), 1) if len(values) > 1 else 0,
+              }
+
+          data = {
+              "cold_build": collect("cold", "build_seconds"),
+              "cold_pip": collect("cold", "pip_seconds"),
+              "warm_build": collect("warm", "build_seconds"),
+              "warm_pip": collect("warm", "pip_seconds"),
+              "site_size_kb": collect("cold", "site_size_kb"),
+              "site_files": collect("cold", "site_files"),
+          }
+          Path("docs/_data/measurements.json").write_text(
+              json.dumps(data, indent=2, ensure_ascii=False)
+          )
+          print(json.dumps(data, indent=2, ensure_ascii=False))
+          PY
+
+      - name: Validate JSON
+        run: |
+          python3 -c "import json; json.load(open('docs/_data/measurements.json')); print('JSON valid')"
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/_data/measurements.json
+          if git diff --staged --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Update measurements"
+            git push
+          fi
