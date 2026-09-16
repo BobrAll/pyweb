@@ -30,7 +30,7 @@ jobs:
         run: mkdocs build --strict
 
       - name: Upload Pages artifact
-        uses: upload-pages-artifact
+        uses: actions/upload-pages-artifact@v1
         with:
           path: site/
 
@@ -39,4 +39,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitVerse Pages
-        uses: deploy-pages
+        uses: actions/deploy-pages@v1
