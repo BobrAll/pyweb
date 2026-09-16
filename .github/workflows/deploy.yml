@@ -108,18 +108,18 @@ jobs:
           if [ "$GITHUB_REF_NAME" = "main" ]; then
             TARGET_PATH="$BASE_PATH"
             SCOPE="main"
-            RSYNC_EXCLUDES=(--exclude ".rollback/" --exclude ".releases/" --exclude "previews/")
+            RSYNC_EXCLUDES="--exclude .rollback/ --exclude .releases/ --exclude previews/"
           else
             TARGET_PATH="$BASE_PATH/previews/$BRANCH_SLUG"
             SCOPE="previews/$BRANCH_SLUG"
-            RSYNC_EXCLUDES=()
+            RSYNC_EXCLUDES=""
           fi
           RELEASE_PATH="$BASE_PATH/.releases/$SCOPE/$TIMESTAMP"
           BACKUP_PATH="$BASE_PATH/.rollback/$SCOPE/$TIMESTAMP"
           $SSH_CMD "$REMOTE" "mkdir -p '$TARGET_PATH' '$RELEASE_PATH' '$BACKUP_PATH'"
-          $SSH_CMD "$REMOTE" "if [ -n \"\$(find '$TARGET_PATH' -mindepth 1 -maxdepth 1 2>/dev/null | head -n 1)\" ]; then rsync -a --delete ${RSYNC_EXCLUDES[*]} '$TARGET_PATH'/ '$BACKUP_PATH'/; fi"
+          $SSH_CMD "$REMOTE" "if [ -n \"\$(find '$TARGET_PATH' -mindepth 1 -maxdepth 1 2>/dev/null | head -n 1)\" ]; then rsync -a --delete $RSYNC_EXCLUDES '$TARGET_PATH'/ '$BACKUP_PATH'/; fi"
           rsync -az --delete -e "$SSH_CMD" site/ "$REMOTE:$RELEASE_PATH/"
-          rsync -az --delete "${RSYNC_EXCLUDES[@]}" -e "$SSH_CMD" "$REMOTE:$RELEASE_PATH/" "$REMOTE:$TARGET_PATH/"
+          $SSH_CMD "$REMOTE" "rsync -a --delete $RSYNC_EXCLUDES '$RELEASE_PATH'/ '$TARGET_PATH'/"
 
       - name: Rollback Helios
         if: github.event.inputs.rollback == 'true'
@@ -133,11 +133,11 @@ jobs:
           if [ "$GITHUB_REF_NAME" = "main" ]; then
             TARGET_PATH="$BASE_PATH"
             SCOPE="main"
-            RSYNC_EXCLUDES=(--exclude ".rollback/" --exclude ".releases/" --exclude "previews/")
+            RSYNC_EXCLUDES="--exclude .rollback/ --exclude .releases/ --exclude previews/"
           else
             TARGET_PATH="$BASE_PATH/previews/$BRANCH_SLUG"
             SCOPE="previews/$BRANCH_SLUG"
-            RSYNC_EXCLUDES=()
+            RSYNC_EXCLUDES=""
           fi
           if [ "$ROLLBACK_REF" = "latest" ]; then
             SOURCE_PATH="$($SSH_CMD "$REMOTE" "ls -1dt '$BASE_PATH/.rollback/$SCOPE'/* 2>/dev/null | head -n 1")"
@@ -149,7 +149,7 @@ jobs:
             exit 1
           fi
           $SSH_CMD "$REMOTE" "test -d '$SOURCE_PATH' && mkdir -p '$TARGET_PATH'"
-          rsync -az --delete "${RSYNC_EXCLUDES[@]}" -e "$SSH_CMD" "$REMOTE:$SOURCE_PATH/" "$REMOTE:$TARGET_PATH/"
+          $SSH_CMD "$REMOTE" "rsync -a --delete $RSYNC_EXCLUDES '$SOURCE_PATH'/ '$TARGET_PATH'/"
 
       - name: Healthcheck
         run: |
