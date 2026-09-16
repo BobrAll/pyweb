@@ -67,7 +67,7 @@ jobs:
           python-version: '3.13'
 
       - name: Restore pip cache
-        uses: actions/cache@v3
+        uses: actions/cache/restore@v3
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
@@ -82,7 +82,7 @@ jobs:
         run: mkdocs build --strict
 
       - name: Upload Pages artifact
-        uses: gitverse/upload-pages-artifact@v1.0.0
+        uses: actions/upload-pages-artifact@v1
         with:
           path: site/
 
@@ -92,4 +92,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitVerse Pages
-        uses: gitverse/deploy-pages@v1.0.0
+        uses: actions/deploy-pages@v1
