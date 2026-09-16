@@ -5,5 +5,6 @@
 Сайты: 
  - https://bobrall.github.io/pyweb/
  - https://bobrall.gitverse.site/pyweb/
+ - https://se.ifmo.ru/~s339795/pyweb/
 
 Стек: MkDocs + Material, GitHub Actions, Helios ИТМО.
