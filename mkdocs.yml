@@ -59,4 +59,5 @@ nav:
   - Эксперименты: experiments/index.md
   - Отчёт:
       - Измерения: report/measurements.md
+      - Helios P4: report/helios-p4.md
   - Лицензии: licenses.md

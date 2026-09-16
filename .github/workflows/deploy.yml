@@ -2,8 +2,21 @@ name: Deploy MkDocs
 
 on:
   push:
-    branches: [ main ]
+    branches: [ '**' ]
   workflow_dispatch:
+    inputs:
+      rollback:
+        description: Restore the previous Helios version for the selected branch
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+      rollback_ref:
+        description: Backup directory name or latest
+        required: false
+        default: latest
 
 permissions:
   contents: read
@@ -19,6 +32,7 @@ env:
 
 jobs:
   build:
+    if: github.event.inputs.rollback != 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -52,7 +66,7 @@ jobs:
 
   deploy:
     needs: build
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && github.event.inputs.rollback != 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -64,10 +78,11 @@ jobs:
 
   deploy-helios:
     needs: build
-    if: github.ref == 'refs/heads/main'
+    if: always() && (needs.build.result == 'success' || github.event.inputs.rollback == 'true')
     runs-on: ubuntu-latest
     steps:
       - name: Download artifact
+        if: github.event.inputs.rollback != 'true'
         uses: actions/download-artifact@v4
         with:
           name: site
@@ -82,21 +97,76 @@ jobs:
           chmod 644 ~/.ssh/known_hosts
 
       - name: Deploy via rsync
+        if: github.event.inputs.rollback != 'true'
         run: |
-          rsync -avz --delete \
-            -e "ssh -p ${{ secrets.HELIOS_PORT }} -i ~/.ssh/deploy_key -o UserKnownHostsFile=~/.ssh/known_hosts" \
-            site/ \
-            ${{ secrets.HELIOS_USER }}@${{ secrets.HELIOS_HOST }}:${{ secrets.HELIOS_PATH }}
+          set -euo pipefail
+          BRANCH_SLUG="$(printf '%s' "$GITHUB_REF_NAME" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]+/-/g; s/^-+|-+$//g')"
+          TIMESTAMP="$(date -u +%Y%m%d%H%M%S)"
+          SSH_CMD="ssh -p ${{ secrets.HELIOS_PORT }} -i ~/.ssh/deploy_key -o UserKnownHostsFile=~/.ssh/known_hosts"
+          REMOTE="${{ secrets.HELIOS_USER }}@${{ secrets.HELIOS_HOST }}"
+          BASE_PATH="${{ secrets.HELIOS_PATH }}"
+          if [ "$GITHUB_REF_NAME" = "main" ]; then
+            TARGET_PATH="$BASE_PATH"
+            SCOPE="main"
+            RSYNC_EXCLUDES=(--exclude ".rollback/" --exclude ".releases/" --exclude "previews/")
+          else
+            TARGET_PATH="$BASE_PATH/previews/$BRANCH_SLUG"
+            SCOPE="previews/$BRANCH_SLUG"
+            RSYNC_EXCLUDES=()
+          fi
+          RELEASE_PATH="$BASE_PATH/.releases/$SCOPE/$TIMESTAMP"
+          BACKUP_PATH="$BASE_PATH/.rollback/$SCOPE/$TIMESTAMP"
+          $SSH_CMD "$REMOTE" "mkdir -p '$TARGET_PATH' '$RELEASE_PATH' '$BACKUP_PATH'"
+          $SSH_CMD "$REMOTE" "if [ -n \"\$(find '$TARGET_PATH' -mindepth 1 -maxdepth 1 2>/dev/null | head -n 1)\" ]; then rsync -a --delete ${RSYNC_EXCLUDES[*]} '$TARGET_PATH'/ '$BACKUP_PATH'/; fi"
+          rsync -az --delete -e "$SSH_CMD" site/ "$REMOTE:$RELEASE_PATH/"
+          rsync -az --delete "${RSYNC_EXCLUDES[@]}" -e "$SSH_CMD" "$REMOTE:$RELEASE_PATH/" "$REMOTE:$TARGET_PATH/"
+
+      - name: Rollback Helios
+        if: github.event.inputs.rollback == 'true'
+        run: |
+          set -euo pipefail
+          BRANCH_SLUG="$(printf '%s' "$GITHUB_REF_NAME" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]+/-/g; s/^-+|-+$//g')"
+          SSH_CMD="ssh -p ${{ secrets.HELIOS_PORT }} -i ~/.ssh/deploy_key -o UserKnownHostsFile=~/.ssh/known_hosts"
+          REMOTE="${{ secrets.HELIOS_USER }}@${{ secrets.HELIOS_HOST }}"
+          BASE_PATH="${{ secrets.HELIOS_PATH }}"
+          ROLLBACK_REF="${{ github.event.inputs.rollback_ref }}"
+          if [ "$GITHUB_REF_NAME" = "main" ]; then
+            TARGET_PATH="$BASE_PATH"
+            SCOPE="main"
+            RSYNC_EXCLUDES=(--exclude ".rollback/" --exclude ".releases/" --exclude "previews/")
+          else
+            TARGET_PATH="$BASE_PATH/previews/$BRANCH_SLUG"
+            SCOPE="previews/$BRANCH_SLUG"
+            RSYNC_EXCLUDES=()
+          fi
+          if [ "$ROLLBACK_REF" = "latest" ]; then
+            SOURCE_PATH="$($SSH_CMD "$REMOTE" "ls -1dt '$BASE_PATH/.rollback/$SCOPE'/* 2>/dev/null | head -n 1")"
+          else
+            SOURCE_PATH="$BASE_PATH/.rollback/$SCOPE/$ROLLBACK_REF"
+          fi
+          if [ -z "$SOURCE_PATH" ]; then
+            echo "Rollback failed: backup not found"
+            exit 1
+          fi
+          $SSH_CMD "$REMOTE" "test -d '$SOURCE_PATH' && mkdir -p '$TARGET_PATH'"
+          rsync -az --delete "${RSYNC_EXCLUDES[@]}" -e "$SSH_CMD" "$REMOTE:$SOURCE_PATH/" "$REMOTE:$TARGET_PATH/"
 
       - name: Healthcheck
         run: |
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" ${{ secrets.HELIOS_URL }})
+          set -euo pipefail
+          BRANCH_SLUG="$(printf '%s' "$GITHUB_REF_NAME" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]+/-/g; s/^-+|-+$//g')"
+          if [ "$GITHUB_REF_NAME" = "main" ]; then
+            CHECK_URL="${{ secrets.HELIOS_URL }}"
+          else
+            CHECK_URL="${{ secrets.HELIOS_URL }}/previews/$BRANCH_SLUG/"
+          fi
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$CHECK_URL")
           if [ "$STATUS" != "200" ]; then
             echo "Healthcheck failed: HTTP $STATUS"
             exit 1
           fi
-          if ! curl -s ${{ secrets.HELIOS_URL }} | grep -q "Результаты исследований"; then
+          if ! curl -s "$CHECK_URL" | grep -q "Результаты исследований"; then
             echo "Healthcheck failed: контрольная строка не найдена"
             exit 1
           fi
-          echo "Healthcheck OK"
+          echo "Healthcheck OK: $CHECK_URL"
