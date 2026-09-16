@@ -1,7 +1,7 @@
 site_name: Результаты исследований
 site_description: Публикация результатов экспериментов
 site_author: Александр Бобрусь
-site_url: https://BobrAll.github.io/pyweb/
+site_url: https://bobrall.github.io/pyweb/
 
 theme:
   name: material
