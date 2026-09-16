@@ -155,17 +155,19 @@ jobs:
         run: |
           set -euo pipefail
           BRANCH_SLUG="$(printf '%s' "$GITHUB_REF_NAME" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]+/-/g; s/^-+|-+$//g')"
+          HELIOS_URL="${{ secrets.HELIOS_URL }}"
+          HELIOS_URL="${HELIOS_URL%/}"
           if [ "$GITHUB_REF_NAME" = "main" ]; then
-            CHECK_URL="${{ secrets.HELIOS_URL }}"
+            CHECK_URL="$HELIOS_URL/"
           else
-            CHECK_URL="${{ secrets.HELIOS_URL }}/previews/$BRANCH_SLUG/"
+            CHECK_URL="$HELIOS_URL/previews/$BRANCH_SLUG/"
           fi
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$CHECK_URL")
+          STATUS=$(curl -sSL -o /tmp/helios-healthcheck.html -w "%{http_code}" "$CHECK_URL")
           if [ "$STATUS" != "200" ]; then
             echo "Healthcheck failed: HTTP $STATUS"
             exit 1
           fi
-          if ! curl -s "$CHECK_URL" | grep -q "Результаты исследований"; then
+          if ! grep -Fq "Результаты исследований" /tmp/helios-healthcheck.html; then
             echo "Healthcheck failed: контрольная строка не найдена"
             exit 1
           fi
