@@ -1,8 +1,74 @@
 {
-  "cold_build": {"raw": [0, 0, 0], "median": 0, "mean": 0, "min": 0, "max": 0, "stdev": 0},
-  "cold_pip": {"raw": [0, 0, 0], "median": 0, "mean": 0, "min": 0, "max": 0, "stdev": 0},
-  "warm_build": {"raw": [0, 0, 0], "median": 0, "mean": 0, "min": 0, "max": 0, "stdev": 0},
-  "warm_pip": {"raw": [0, 0, 0], "median": 0, "mean": 0, "min": 0, "max": 0, "stdev": 0},
-  "site_size_kb": {"raw": [0, 0, 0], "median": 0, "mean": 0, "min": 0, "max": 0, "stdev": 0},
-  "site_files": {"raw": [0, 0, 0], "median": 0, "mean": 0, "min": 0, "max": 0, "stdev": 0}
+  "cold_build": {
+    "raw": [
+      1,
+      0,
+      0
+    ],
+    "median": 0,
+    "mean": 0.3,
+    "min": 0,
+    "max": 1,
+    "stdev": 0.6
+  },
+  "cold_pip": {
+    "raw": [
+      7,
+      6,
+      9
+    ],
+    "median": 7,
+    "mean": 7.3,
+    "min": 6,
+    "max": 9,
+    "stdev": 1.5
+  },
+  "warm_build": {
+    "raw": [
+      1,
+      1,
+      1
+    ],
+    "median": 1,
+    "mean": 1,
+    "min": 1,
+    "max": 1,
+    "stdev": 0.0
+  },
+  "warm_pip": {
+    "raw": [
+      5,
+      6,
+      7
+    ],
+    "median": 6,
+    "mean": 6,
+    "min": 5,
+    "max": 7,
+    "stdev": 1.0
+  },
+  "site_size_kb": {
+    "raw": [
+      2704,
+      2704,
+      2704
+    ],
+    "median": 2704,
+    "mean": 2704,
+    "min": 2704,
+    "max": 2704,
+    "stdev": 0.0
+  },
+  "site_files": {
+    "raw": [
+      53,
+      53,
+      53
+    ],
+    "median": 53,
+    "mean": 53,
+    "min": 53,
+    "max": 53,
+    "stdev": 0.0
+  }
 }
