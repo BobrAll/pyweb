@@ -64,6 +64,7 @@ nav:
   - Отчёт:
       - P1 CI/CD: report/p1.md
       - P2 Стресс-тест: report/p2.md
+      - P3 Конвейер: report/p3.md
       - P4 Helios: report/helios-p4.md
       - Измерения: report/measurements.md
   - Лицензии: licenses.md
