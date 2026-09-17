@@ -34,6 +34,17 @@ def git_commit() -> str:
         return "unknown"
 
 
+def data_changed_in_commit() -> bool:
+    try:
+        out = subprocess.run(
+            ["git", "diff", "--name-only", "HEAD~1", "HEAD", "--", "data"],
+            cwd=ROOT, capture_output=True, text=True, check=True,
+        )
+        return bool(out.stdout.strip())
+    except (subprocess.CalledProcessError, FileNotFoundError, OSError):
+        return False
+
+
 def load_data() -> tuple[np.ndarray, np.ndarray]:
     raw = np.genfromtxt(DATA_PATH, delimiter=",", names=True)
     return raw["t"], raw["amplitude"]
@@ -103,6 +114,7 @@ def render_outputs(t: np.ndarray, y: np.ndarray, fit: dict) -> str:
 
 def main() -> None:
     started = time.perf_counter()
+    now_iso = datetime.now(ZoneInfo("Europe/Moscow")).isoformat(timespec="seconds")
     data_sha = sha256_file(DATA_PATH)
     script_sha = sha256_file(Path(__file__))
     OUT_DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -118,6 +130,11 @@ def main() -> None:
     prev_pipeline = {}
     if prev_pipeline_path.exists():
         prev_pipeline = json.loads(prev_pipeline_path.read_text())
+
+    prev_build_info_path = OUT_DATA_DIR / "build_info.json"
+    prev_build_info = {}
+    if prev_build_info_path.exists():
+        prev_build_info = json.loads(prev_build_info_path.read_text())
 
     cached_files_exist = all(
         (CACHE_DIR / name).exists()
@@ -145,8 +162,14 @@ def main() -> None:
             or prev_pipeline.get("fresh_seconds")
             or elapsed
         )
+        data_changed_at = (
+            manifest.get("data_changed_at")
+            or prev_pipeline.get("data_changed_at")
+        )
         pipeline = {
             "last_run": "cached",
+            "data_changed": False,
+            "data_changed_at": data_changed_at,
             "fresh_seconds": fresh_seconds,
             "cached_seconds": elapsed,
             "saved_percent": round(
@@ -172,8 +195,20 @@ def main() -> None:
             manifest.get("cached_seconds")
             or prev_pipeline.get("cached_seconds")
         )
+        prev_version = (
+            manifest.get("data_sha")
+            or prev_build_info.get("dataset_version")
+        )
+        data_changed = (prev_version != data_sha) or data_changed_in_commit()
+        data_changed_at = (
+            now_iso if data_changed
+            else manifest.get("data_changed_at")
+            or prev_pipeline.get("data_changed_at")
+        )
         pipeline = {
             "last_run": "fresh",
+            "data_changed": data_changed,
+            "data_changed_at": data_changed_at,
             "fresh_seconds": elapsed,
             "cached_seconds": cached_seconds,
             "saved_percent": round(
@@ -188,6 +223,7 @@ def main() -> None:
         "script_sha": script_sha,
         "fresh_seconds": pipeline["fresh_seconds"],
         "cached_seconds": pipeline["cached_seconds"],
+        "data_changed_at": pipeline["data_changed_at"],
     }
     manifest_path.write_text(json.dumps(manifest, indent=2))
     (OUT_DATA_DIR / "pipeline.json").write_text(json.dumps(pipeline, indent=2))

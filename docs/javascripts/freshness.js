@@ -15,7 +15,7 @@
     function tick() {
         var now = Date.now();
         document.querySelectorAll(".fresh-box").forEach(function (box) {
-            var ts = Date.parse(box.dataset.buildTs || "");
+            var ts = Date.parse(box.dataset.changedAt || "");
             if (isNaN(ts)) {
                 return;
             }

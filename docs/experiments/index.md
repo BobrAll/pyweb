@@ -16,7 +16,7 @@ $A e^{-t/\tau}$, строит графики и выгружает резуль�
 
 ## Результаты подгонки
 
-<div class="fresh-box" markdown="1" data-build-ts="{{ build_info.build_ts }}">
+<div class="fresh-box" markdown="1" data-changed-at="{{ pipeline.data_changed_at if pipeline.data_changed_at is not none else '' }}">
 
 | Параметр | Значение |
 |---|---|
@@ -30,7 +30,7 @@ $A e^{-t/\tau}$, строит графики и выгружает резуль�
 
 ## Измеренные данные
 
-<div class="fresh-box" markdown="1" data-build-ts="{{ build_info.build_ts }}">
+<div class="fresh-box" markdown="1" data-changed-at="{{ pipeline.data_changed_at if pipeline.data_changed_at is not none else '' }}">
 
 | $t$, с | Амплитуда |
 |---:|---:|
@@ -55,6 +55,9 @@ $A e^{-t/\tau}$, строит графики и выгружает резуль�
 Скрипт сохраняет результаты в `.build/experiment/` вместе с манифестом
 (хеш данных + хеш скрипта). Если ни данные, ни код не менялись, пересчёт
 пропускается, а готовые артефакты копируются из кэша.
+
+Таблицы выше подсвечиваются зелёным, если данные `experiment.csv` были изменены
+менее минуты назад; подсветка плавно гаснет к обычному виду в течение минуты.
 
 | Сценарий | Время, с |
 |---|---:|
