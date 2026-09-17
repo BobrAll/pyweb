@@ -37,7 +37,7 @@ $$
 ## Статический график
 
 <figure>
-  <img src="../report/images/static-chart.png" alt="Затухающие колебания" width="720" />
+  <img src="../report/images/stress/static-chart.png" alt="Затухающие колебания" width="720" />
   <figcaption>Рисунок 1. Затухающие колебания, построенные matplotlib</figcaption>
 </figure>
 
@@ -75,7 +75,7 @@ MkDocs не поддерживает BibTeX без плагинов[^fn-bibtex],
   </div>
   <div style="flex:1 1 320px;">
     <figure>
-      <img src="../report/images/static-chart.png" alt="График" width="100%" />
+      <img src="../report/images/stress/static-chart.png" alt="График" width="100%" />
       <figcaption>Иллюстрация справа</figcaption>
     </figure>
   </div>
