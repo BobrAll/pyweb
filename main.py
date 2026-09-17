@@ -31,8 +31,13 @@ def load_measurements(path: Path) -> dict:
 def define_env(env):
     """Загружает measurements.json и регистрирует фильтры Jinja2."""
 
-    measurements_path = Path(env.project_dir) / "docs" / "_data" / "measurements.json"
+    data_dir = Path(env.project_dir) / "docs" / "_data"
+    measurements_path = data_dir / "measurements.json"
     env.variables["measurements"] = load_measurements(measurements_path)
+
+    for name in ("experiment", "build_info", "pipeline"):
+        path = data_dir / f"{name}.json"
+        env.variables[name] = json.load(open(path, encoding="utf-8")) if path.exists() else {}
 
     @env.filter
     def percent_saved(cold, warm):

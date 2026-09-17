@@ -12,6 +12,7 @@ fi
 .venv/bin/pip install --upgrade pip --quiet
 .venv/bin/pip install -r requirements.txt --quiet
 
+.venv/bin/python scripts/run_experiment.py
 .venv/bin/python scripts/make_charts.py
 
 .venv/bin/mkdocs build --strict
