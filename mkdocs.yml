@@ -58,6 +58,7 @@ nav:
   - Методика: methodology.md
   - Эксперименты: experiments/index.md
   - Отчёт:
+      - P1 CI/CD: report/p1.md
       - Измерения: report/measurements.md
       - Helios P4: report/helios-p4.md
   - Лицензии: licenses.md
