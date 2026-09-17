@@ -2,8 +2,9 @@ import hashlib
 import json
 import subprocess
 import time
-from datetime import datetime, timezone
+from datetime import datetime
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import matplotlib
 matplotlib.use("Agg")
@@ -193,7 +194,12 @@ def main() -> None:
 
     build_info = {
         "commit": git_commit(),
-        "build_date": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+        "build_date": datetime.now(ZoneInfo("Europe/Moscow")).strftime(
+            "%Y-%m-%d %H:%M МСК"
+        ),
+        "build_ts": datetime.now(ZoneInfo("Europe/Moscow")).isoformat(
+            timespec="seconds"
+        ),
         "dataset_version": data_sha,
         "dataset_file": "data/experiment.csv",
     }

@@ -16,6 +16,8 @@ $A e^{-t/\tau}$, строит графики и выгружает резуль�
 
 ## Результаты подгонки
 
+<div class="fresh-box" markdown="1" data-build-ts="{{ build_info.build_ts }}">
+
 | Параметр | Значение |
 |---|---|
 | Начальная амплитуда $A$ | {{ experiment.A }} |
@@ -24,12 +26,18 @@ $A e^{-t/\tau}$, строит графики и выгружает резуль�
 | σ остатков (лог-шкала) | {{ experiment.residual_std }} |
 | Точек в выборке | {{ experiment.n_points }} |
 
+</div>
+
 ## Измеренные данные
+
+<div class="fresh-box" markdown="1" data-build-ts="{{ build_info.build_ts }}">
 
 | $t$, с | Амплитуда |
 |---:|---:|
 {% for p in experiment.points %}| {{ p.t }} | {{ p.amplitude }} |
 {% endfor %}
+
+</div>
 
 ## Статический график
 
