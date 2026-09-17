@@ -1,6 +1,7 @@
 .venv/
 site/
 .build/
+sphinx/_build/
 __pycache__/
 *.pyc
 .DS_Store

@@ -29,6 +29,9 @@ theme:
         icon: material/brightness-4
         name: Светлая тема
 
+extra_css:
+  - stylesheets/stress.css
+
 plugins:
   - search
   - macros:
@@ -57,8 +60,10 @@ nav:
   - Главная: index.md
   - Методика: methodology.md
   - Эксперименты: experiments/index.md
+  - Стресс-тест: stress/index.md
   - Отчёт:
       - P1 CI/CD: report/p1.md
+      - P2 Стресс-тест: report/p2.md
       - Измерения: report/measurements.md
       - Helios P4: report/helios-p4.md
   - Лицензии: licenses.md
