@@ -25,7 +25,7 @@ fig.tight_layout()
 
 for dest in [ROOT / "docs" / "report" / "images", ROOT / "sphinx" / "stress"]:
     dest.mkdir(parents=True, exist_ok=True)
-    fig.savefig(dest / "static_chart.png")
+    fig.savefig(dest / "static-chart.png")
 
 fig2 = go.Figure()
 fig2.add_trace(go.Scatter(x=x, y=y1, mode="lines", name="серия 1"))

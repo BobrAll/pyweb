@@ -38,7 +38,7 @@ x(t) = A e^{-\gamma t}\cos(\omega t + \varphi)
 
 ## Статический график
 
-```{figure} ./static_chart.png
+```{figure} ./static-chart.png
 :width: 720px
 
 Рисунок 1. Затухающие колебания, построенные matplotlib
@@ -81,7 +81,7 @@ for t in range(0, 10):
   </div>
   <div style="flex:1 1 320px;">
     <figure>
-      <img src="../_images/static_chart.png" alt="График" width="100%" />
+      <img src="../_images/static-chart.png" alt="График" width="100%" />
       <figcaption>Иллюстрация справа</figcaption>
     </figure>
   </div>
