@@ -1,0 +1,27 @@
+table.stress-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 16px 0;
+}
+
+table.stress-table caption {
+    caption-side: top;
+    padding-bottom: 8px;
+    font-style: italic;
+}
+
+table.stress-table th,
+table.stress-table td {
+    border: 1px solid #9ca3af;
+    padding: 10px 14px;
+    text-align: center;
+}
+
+table.stress-table thead th {
+    background: rgba(99, 102, 241, 0.12);
+}
+
+table.stress-table td[rowspan],
+table.stress-table td[colspan] {
+    background: rgba(99, 102, 241, 0.05);
+}
