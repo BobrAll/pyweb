@@ -1,0 +1,31 @@
+1
+Run mkdocs build --strict
+4
+INFO    -  [macros] - Found local Python module 'main' in: /workspace/BobrAll/pyweb
+5
+INFO    -  [macros] - Found external Python module 'main' in: /workspace/BobrAll/pyweb
+6
+INFO    -  [macros] - Functions found: define_env,on_pre_page_macros,on_post_page_macros,on_post_build
+7
+INFO    -  [macros] - Includes directory: docs/_data
+8
+INFO    -  [macros] - Config variables: ['extra', 'config', 'environment', 'plugin', 'git', 'measurements', 'macros', 'filters', 'filters_builtin']
+9
+INFO    -  [macros] - Config macros: ['context', 'macros_info', 'now', 'fix_url']
+10
+INFO    -  [macros] - Config filters: ['pretty', 'relative_url', 'percent_saved']
+11
+INFO    -  Cleaning site directory
+12
+INFO    -  Building documentation to directory: /workspace/BobrAll/pyweb/site
+13
+INFO    -  The following pages exist in the docs directory, but are not included in the "nav" configuration:
+14
+  - index.md
+15
+WARNING -  A reference to 'index7.md' is included in the 'nav' configuration, which is not found in the documentation files.
+16
+17
+Aborted with 1 warnings in strict mode!
+18
+##[error]Process completed with exit code 1.

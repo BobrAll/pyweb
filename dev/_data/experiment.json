@@ -1,0 +1,63 @@
+{
+  "A": 2.4306,
+  "tau": 4.0939,
+  "r2": 0.9957,
+  "residual_std": 0.06,
+  "n_points": 13,
+  "amplitude_start": 2.5092,
+  "amplitude_end": 0.1264,
+  "points": [
+    {
+      "t": 0.0,
+      "amplitude": 2.5092
+    },
+    {
+      "t": 1.0,
+      "amplitude": 1.9158
+    },
+    {
+      "t": 2.0,
+      "amplitude": 1.5388
+    },
+    {
+      "t": 3.0,
+      "amplitude": 1.2091
+    },
+    {
+      "t": 4.0,
+      "amplitude": 0.8612
+    },
+    {
+      "t": 5.0,
+      "amplitude": 0.6772
+    },
+    {
+      "t": 6.0,
+      "amplitude": 0.5617
+    },
+    {
+      "t": 7.0,
+      "amplitude": 0.4249
+    },
+    {
+      "t": 8.0,
+      "amplitude": 0.3378
+    },
+    {
+      "t": 9.0,
+      "amplitude": 0.2379
+    },
+    {
+      "t": 10.0,
+      "amplitude": 0.2316
+    },
+    {
+      "t": 11.0,
+      "amplitude": 0.1832
+    },
+    {
+      "t": 12.0,
+      "amplitude": 0.1264
+    }
+  ]
+}
