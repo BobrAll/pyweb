@@ -12,13 +12,13 @@
         <meta name="author" content="Александр Бобрусь">
       
       
-        <link rel="canonical" href="https://bobrall.github.io/pyweb/dev/report/t1/">
+        <link rel="canonical" href="https://bobrall.github.io/pyweb/dev/report/t2/">
       
       
-        <link rel="prev" href="../../stress/">
+        <link rel="prev" href="../t1/">
       
       
-        <link rel="next" href="../t2/">
+        <link rel="next" href="../t3/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>T1 Сравнение генераторов - Результаты исследований</title>
+        <title>T2 Анализ конвейера «эксперимент → артефакт → страница» - Результаты исследований</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1" class="md-skip">
+        <a href="#2" class="md-skip">
           Перейти к содержанию
         </a>
       
@@ -122,7 +122,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              T1 Сравнение генераторов
+              T2 Анализ конвейера «эксперимент → артефакт → страница»
             
           </span>
         </div>
@@ -405,6 +405,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../t1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    T1 Сравнение генераторов
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -424,7 +452,7 @@
   <span class="md-ellipsis">
     
   
-    T1 Сравнение генераторов
+    T2 Анализ конвейера «эксперимент → артефакт → страница»
   
 
     
@@ -442,7 +470,7 @@
   <span class="md-ellipsis">
     
   
-    T1 Сравнение генераторов
+    T2 Анализ конвейера «эксперимент → артефакт → страница»
   
 
     
@@ -487,56 +515,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Обоснование весов критериев">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Критерии с весом 5 (критически важные)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Критерии с весом 4
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Критерии с весом 3
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Критерии с весом 2
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -554,19 +532,19 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Детальный анализ по группам критериев
+        Детальный анализ
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Детальный анализ по группам критериев">
+    <nav class="md-nav" aria-label="Детальный анализ">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1_1" class="md-nav__link">
+  <a href="#1-png" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Представление научного контента
+        1. Ручные PNG
       
     </span>
   </a>
@@ -574,10 +552,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2_1" class="md-nav__link">
+  <a href="#2-nbconvert-myst-nb-quarto" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Вёрстка и шаблоны
+        2. nbconvert / MyST-NB / Quarto
       
     </span>
   </a>
@@ -585,10 +563,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3_1" class="md-nav__link">
+  <a href="#3-papermill" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Эксплуатационные характеристики
+        3. papermill
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-makefilenox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Скрипт + Makefile/nox
       
     </span>
   </a>
@@ -601,22 +590,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#ci" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Вывод
+        Ограничения CI для тяжёлых вычислений
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Вывод">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Граница между стратегиями
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Оптимальный генератор для задачи публикации результатов экспериментов
+        Связь результата с версией кода и данных
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Связь результата с версией кода и данных">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Хеши датасетов
       
     </span>
   </a>
@@ -624,10 +635,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#2_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Условия, при которых вывод меняется
+        2. Версии датасетов
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Метаданные запуска
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Отображение на странице
       
     </span>
   </a>
@@ -639,38 +672,21 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вывод
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../t2/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    T2 Анализ конвейера «эксперимент → артефакт → страница»
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -980,56 +996,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Обоснование весов критериев">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Критерии с весом 5 (критически важные)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Критерии с весом 4
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Критерии с весом 3
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Критерии с весом 2
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -1047,19 +1013,19 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Детальный анализ по группам критериев
+        Детальный анализ
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Детальный анализ по группам критериев">
+    <nav class="md-nav" aria-label="Детальный анализ">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1_1" class="md-nav__link">
+  <a href="#1-png" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Представление научного контента
+        1. Ручные PNG
       
     </span>
   </a>
@@ -1067,10 +1033,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2_1" class="md-nav__link">
+  <a href="#2-nbconvert-myst-nb-quarto" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Вёрстка и шаблоны
+        2. nbconvert / MyST-NB / Quarto
       
     </span>
   </a>
@@ -1078,10 +1044,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3_1" class="md-nav__link">
+  <a href="#3-papermill" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Эксплуатационные характеристики
+        3. papermill
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-makefilenox" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Скрипт + Makefile/nox
       
     </span>
   </a>
@@ -1094,22 +1071,44 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#ci" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Вывод
+        Ограничения CI для тяжёлых вычислений
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Вывод">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Граница между стратегиями
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Оптимальный генератор для задачи публикации результатов экспериментов
+        Связь результата с версией кода и данных
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Связь результата с версией кода и данных">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Хеши датасетов
       
     </span>
   </a>
@@ -1117,10 +1116,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#2_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Условия, при которых вывод меняется
+        2. Версии датасетов
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Метаданные запуска
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Отображение на странице
       
     </span>
   </a>
@@ -1129,6 +1150,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Вывод
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1149,39 +1181,14 @@
 
 
 
-<h1 id="1">Т1. Сравнительный анализ генераторов статических сайтов<a class="headerlink" href="#1" title="Permanent link">&para;</a></h1>
+<h1 id="2">Т2. Анализ конвейера «эксперимент → артефакт → страница»<a class="headerlink" href="#2" title="Permanent link">&para;</a></h1>
 <h2 id="_1">Введение<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>В рамках данного исследования проведён сравнительный анализ четырёх генераторов статических сайтов (SSG) на Python: <strong>MkDocs</strong> (с темой Material), <strong>Sphinx</strong> (с MyST-Parser), <strong>Pelican</strong> и <strong>Quarto</strong>. Цель — определить оптимальный инструмент для публикации результатов экспериментов и сопровождающих их исследовательских материалов.</p>
+<p>Проанализированы способы попадания результатов вычислений на страницы статического сайта. Сравнение по пяти подходам: ручные PNG, исполнение ноутбуков (nbconvert, MyST-NB, Quarto), papermill, генерация артефактов скриптом (Makefile/nox). Отдельно — ограничения CI для тяжёлых вычислений.</p>
 <h2 id="_2">Обоснование весов критериев<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>Веса критериев определены исходя из задачи публикации результатов экспериментов. Каждый критерий оценён по шкале от 1 до 5, где 5 — наиболее важный для данной задачи.</p>
-<h3 id="5">Критерии с весом 5 (критически важные)<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Формулы LaTeX</strong>: обязательны для публикации математических результатов. Требуется поддержка нумерации, ссылок на уравнения и окружений <code>amsmath</code>.</li>
-<li><strong>Библиография (BibTeX)</strong>: научные публикации требуют цитирования источников с автоматическим формированием списка литературы.</li>
-<li><strong>Исполняемый контент</strong>: возможность запускать ноутбуки/скрипты при сборке критична для воспроизводимости результатов (см. задание Р3).</li>
-</ul>
-<h3 id="4">Критерии с весом 4<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Рисунки</strong>: подписи, автонумерация, перекрёстные ссылки.</li>
-<li><strong>Таблицы</strong>: объединение ячеек, генерация из CSV/DataFrame.</li>
-<li><strong>Версионирование документации</strong>: необходимо для отслеживания версий результатов (см. задание Р5).</li>
-<li><strong>Локальный поиск</strong>: качество поиска по русскоязычным запросам.</li>
-</ul>
-<h3 id="3">Критерии с весом 3<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Формат исходников</strong>: Markdown, reStructuredText, MyST, <code>.ipynb</code>, <code>.qmd</code>.</li>
-<li><strong>Интерактивные визуализации</strong>: Plotly, Bokeh, Altair.</li>
-<li><strong>Многоколоночная вёрстка</strong>: grid, cards, columns.</li>
-<li><strong>Экспорт в PDF/LaTeX</strong>: единый источник — несколько представлений.</li>
-<li><strong>Зрелость проекта</strong>: лицензия, активность разработки.</li>
-</ul>
-<h3 id="2">Критерии с весом 2<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Локализация (i18n)</strong>: менее критична, но полезна.</li>
-<li><strong>Автодокументирование кода</strong>: нужно, если публикуется код эксперимента.</li>
-<li><strong>Расширяемость</strong>: плагины, хуки, директивы.</li>
-<li><strong>Время сборки</strong>: холодной и инкрементальной.</li>
-<li><strong>Доступность через зеркала PyPI</strong>: важно для воспроизводимости в РФ.</li>
+<li><strong>Вес 5</strong>: воспроизводимость, связь с версией данных, связь с версией кода.</li>
+<li><strong>Вес 4</strong>: автоматизация, кэширование, скорость сборки, отладка.</li>
+<li><strong>Вес 3</strong>: зависимости, сложность настройки, гибкость, укладывается ли в лимиты CI.</li>
 </ul>
 <h2 id="_3">Матрица сравнения<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <table>
@@ -1189,270 +1196,239 @@
 <tr>
 <th>Критерий</th>
 <th>Вес</th>
-<th>MkDocs + Material</th>
-<th>Sphinx + MyST</th>
-<th>Pelican</th>
+<th>Ручные PNG</th>
+<th>nbconvert / MyST-NB</th>
 <th>Quarto</th>
+<th>papermill</th>
+<th>Скрипт + Makefile/nox</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Представление научного контента</strong></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Формат исходников</td>
-<td>3</td>
-<td>Markdown</td>
-<td>Markdown, MyST, RST</td>
-<td>Markdown, RST, AsciiDoc</td>
-<td>Markdown, <code>.qmd</code>, <code>.ipynb</code></td>
-</tr>
-<tr>
-<td>Формулы LaTeX: движок</td>
+<td>Воспроизводимость</td>
 <td>5</td>
-<td>MathJax / KaTeX</td>
-<td>MathJax / KaTeX</td>
-<td>MathJax (плагин)</td>
-<td>MathJax / KaTeX</td>
-</tr>
-<tr>
-<td>Формулы LaTeX: нумерация</td>
-<td>5</td>
-<td>✅ через <code>pymdownx.arithmatex</code> + <code>tags: 'ams'</code></td>
-<td>✅ через <code>sphinx.ext.mathjax</code> + <code>amsmath</code></td>
-<td>⚠️ ограниченно</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>Формулы LaTeX: ссылки на уравнение</td>
-<td>5</td>
-<td>✅ <code>\eqref{}</code></td>
-<td>✅ <code>:eq:</code></td>
 <td>❌</td>
 <td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
 </tr>
 <tr>
-<td>Формулы LaTeX: окружения amsmath</td>
+<td>Связь с версией данных</td>
 <td>5</td>
+<td>❌</td>
+<td>⚠️</td>
+<td>⚠️</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Связь с версией кода</td>
+<td>5</td>
+<td>⚠️</td>
+<td>⚠️</td>
+<td>⚠️</td>
+<td>⚠️</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Автоматизация</td>
+<td>4</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Кэширование</td>
+<td>4</td>
+<td>❌</td>
 <td>✅</td>
 <td>✅</td>
 <td>⚠️</td>
 <td>✅</td>
 </tr>
 <tr>
-<td>Рисунки: подписи, автонумерация</td>
+<td>Скорость сборки</td>
 <td>4</td>
-<td>⚠️ через <code>attr_list</code> + HTML</td>
-<td>✅ <code>.. figure::</code></td>
-<td>⚠️ через плагины</td>
-<td>✅ <code>#fig-</code></td>
+<td>⚡</td>
+<td>🐢</td>
+<td>🐢</td>
+<td>⚡</td>
+<td>⚡</td>
 </tr>
 <tr>
-<td>Рисунки: перекрёстные ссылки</td>
+<td>Отладка</td>
 <td>4</td>
-<td>⚠️ вручную</td>
-<td>✅ <code>:ref:</code></td>
-<td>❌</td>
 <td>✅</td>
-</tr>
-<tr>
-<td>Таблицы: объединение ячеек</td>
-<td>4</td>
-<td>⚠️ только raw HTML</td>
-<td>⚠️ <code>grid tables</code> / <code>sphinx-excel</code></td>
-<td>⚠️ raw HTML</td>
-<td>✅ через <code>pandoc</code></td>
-</tr>
-<tr>
-<td>Таблицы: генерация из CSV/DataFrame</td>
-<td>4</td>
-<td>⚠️ через плагин</td>
-<td>✅ <code>csv-table</code></td>
-<td>⚠️ через плагин</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>Интерактивные визуализации</td>
-<td>3</td>
-<td>⚠️ <code>mkdocs-plotly-plugin</code></td>
-<td>⚠️ raw HTML</td>
-<td>⚠️ raw HTML</td>
-<td>✅ встроенно</td>
-</tr>
-<tr>
-<td>Исполняемый контент</td>
-<td>5</td>
-<td>⚠️ через <code>mkdocs-jupyter</code></td>
-<td>✅ <code>MyST-NB</code></td>
-<td>❌</td>
-<td>✅ встроенно</td>
-</tr>
-<tr>
-<td>Библиография: BibTeX</td>
-<td>5</td>
-<td>✅ <code>mkdocs-bibtex</code></td>
-<td>✅ <code>sphinxcontrib-bibtex</code></td>
-<td>✅ <code>pelican-bibtex</code></td>
-<td>✅ встроенно</td>
-</tr>
-<tr>
-<td>Сноски, глоссарий</td>
-<td>4</td>
-<td>✅ <code>footnotes</code></td>
-<td>✅ встроенно</td>
-<td>⚠️ через плагин</td>
-<td>✅</td>
-</tr>
-<tr>
-<td><strong>Вёрстка и шаблоны</strong></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Многоколоночная вёрстка</td>
-<td>3</td>
-<td>✅ <code>grid cards</code></td>
-<td>✅ <code>sphinx-design</code></td>
-<td>⚠️ через CSS</td>
-<td>✅ <code>columns</code></td>
-</tr>
-<tr>
-<td>Кастомный шаблон Jinja2</td>
-<td>3</td>
-<td>✅ theme overrides</td>
-<td>✅ темы</td>
-<td>✅ темы</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>Экспорт в PDF/LaTeX</td>
-<td>3</td>
-<td>⚠️ <code>mkdocs-with-pdf</code></td>
-<td>✅ <code>latex</code> builder</td>
-<td>⚠️ через плагин</td>
-<td>✅ встроенно</td>
-</tr>
-<tr>
-<td><strong>Эксплуатационные характеристики</strong></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Версионирование (mike / multiversion)</td>
-<td>4</td>
-<td>✅ <code>mike</code></td>
-<td>✅ <code>sphinx-multiversion</code></td>
-<td>❌</td>
-<td>⚠️ вручную</td>
-</tr>
-<tr>
-<td>Локальный поиск (русский)</td>
-<td>4</td>
-<td>✅ встроенный</td>
-<td>✅ встроенный</td>
-<td>⚠️ через плагин</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>Локализация (i18n)</td>
-<td>2</td>
-<td>✅ <code>mkdocs-static-i18n</code></td>
-<td>✅ встроенно</td>
-<td>⚠️ через плагин</td>
-<td>✅</td>
-</tr>
-<tr>
-<td>Автодокументирование кода</td>
-<td>2</td>
-<td>⚠️ <code>mkdocstrings</code></td>
-<td>✅ <code>autodoc</code></td>
-<td>❌</td>
 <td>⚠️</td>
-</tr>
-<tr>
-<td>Расширяемость</td>
-<td>2</td>
-<td>✅ плагины, хуки</td>
-<td>✅ расширения</td>
-<td>✅ плагины</td>
-<td>✅ расширения</td>
-</tr>
-<tr>
-<td>Время холодной сборки</td>
-<td>2</td>
-<td>⚡ быстрое</td>
-<td>🐢 медленнее</td>
-<td>⚡ быстрое</td>
-<td>🐢 медленное</td>
-</tr>
-<tr>
-<td>Зрелость проекта</td>
-<td>2</td>
-<td>✅ 19.5k ⭐, BSD-2</td>
-<td>✅ 6.5k ⭐, BSD</td>
-<td>✅ 12k ⭐, AGPL</td>
-<td>✅ 4.6k ⭐, MIT</td>
-</tr>
-<tr>
-<td>Доступность через зеркала PyPI</td>
-<td>2</td>
+<td>⚠️</td>
 <td>✅</td>
 <td>✅</td>
+</tr>
+<tr>
+<td>Зависимости</td>
+<td>3</td>
+<td>минимум</td>
+<td>Jupyter</td>
+<td>Quarto+Pandoc</td>
+<td>papermill+Jupyter</td>
+<td>Python</td>
+</tr>
+<tr>
+<td>Сложность настройки</td>
+<td>3</td>
+<td>низкая</td>
+<td>средняя</td>
+<td>средняя</td>
+<td>средняя</td>
+<td>низкая</td>
+</tr>
+<tr>
+<td>Гибкость</td>
+<td>3</td>
+<td>низкая</td>
+<td>средняя</td>
+<td>высокая</td>
+<td>высокая</td>
+<td>высокая</td>
+</tr>
+<tr>
+<td>Лимиты CI</td>
+<td>3</td>
+<td>✅</td>
+<td>⚠️</td>
+<td>⚠️</td>
 <td>✅</td>
 <td>✅</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Обозначения:</strong>
-- ✅ — поддерживается «из коробки» или через официальный плагин
-- ⚠️ — требует дополнительной настройки, плагина или ручного вмешательства
-- ❌ — не поддерживается</p>
-<h2 id="_4">Детальный анализ по группам критериев<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<h3 id="1_1">1. Представление научного контента<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
-<p><strong>MkDocs + Material</strong> демонстрирует отличную поддержку формул LaTeX через <code>pymdownx.arithmatex</code>. Нумерация и ссылки на уравнения реализуются через MathJax с <code>tags: 'ams'</code>. Библиография подключается через <code>mkdocs-bibtex</code>. Однако объединение ячеек в таблицах требует raw HTML, а интерактивные визуализации — установки <code>mkdocs-plotly-plugin</code>.</p>
-<p><strong>Sphinx + MyST</strong> показывает наилучшие результаты для научного контента. MyST поддерживает прямые amsmath-окружения, <code>sphinxcontrib-bibtex</code> обеспечивает полноценную работу с BibTeX, а <code>MyST-NB</code> позволяет исполнять ноутбуки при сборке. Таблицы с объединением ячеек реализуются через <code>grid tables</code> или <code>sphinx-excel</code>.</p>
-<p><strong>Pelican</strong> требует значительных усилий для научного контента. Математика подключается через <code>pelican-render-math</code>, библиография — через <code>pelican-bibtex</code>. Исполняемый контент не поддерживается.</p>
-<p><strong>Quarto</strong> — специализированный инструмент для научных публикаций. Встроенная поддержка формул, библиографии, исполняемого кода и интерактивных визуализаций делает его лидером по этой группе критериев.</p>
-<h3 id="2_1">2. Вёрстка и шаблоны<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
-<p>Material for MkDocs предоставляет <code>grid cards</code> для многоколоночной вёрстки и систему theme overrides для кастомизации. Sphinx использует <code>sphinx-design</code> для grid-вёрстки. Quarto имеет встроенную поддержку <code>columns</code>.</p>
-<h3 id="3_1">3. Эксплуатационные характеристики<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
-<p>Версионирование документации: MkDocs использует <code>mike</code>, Sphinx — <code>sphinx-multiversion</code>. Pelican не имеет встроенного решения. Quarto требует ручной настройки.</p>
-<p>Локальный поиск: MkDocs и Sphinx имеют встроенный поиск с поддержкой русского языка. Pelican требует плагинов. Quarto имеет встроенный поиск.</p>
-<h2 id="_5">Вывод<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<h3 id="_6">Оптимальный генератор для задачи публикации результатов экспериментов<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p><strong>Sphinx с MyST-Parser</strong> является оптимальным выбором для публикации результатов экспериментов, поскольку:</p>
+<h2 id="_4">Детальный анализ<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="1-png">1. Ручные PNG<a class="headerlink" href="#1-png" title="Permanent link">&para;</a></h3>
+<p>Скрипт строит график локально, PNG коммитится, вставляется в Markdown.</p>
+<p><strong>Плюсы</strong>: минимум зависимостей, быстрая сборка, просто отлаживать.
+<strong>Минусы</strong>: не воспроизводимо, нет связи с кодом и данными, легко забыть обновить.
+<strong>Когда</strong>: одноразовая публикация без требований к воспроизводимости. Для науки — <strong>неприемлемо</strong>.</p>
+<h3 id="2-nbconvert-myst-nb-quarto">2. nbconvert / MyST-NB / Quarto<a class="headerlink" href="#2-nbconvert-myst-nb-quarto" title="Permanent link">&para;</a></h3>
+<p>Ноутбук исполняется при сборке, вывод встраивается в страницу.</p>
+<p><strong>Плюсы</strong>: полная воспроизводимость, автоматизация, кэширование ячеек.
+<strong>Минусы</strong>: тяжёлые зависимости (Jupyter, Quarto), медленная сборка, съедает лимиты CI, плохо мержится в git.
+<strong>Когда</strong>: вычисления лёгкие, данные маленькие, укладывается в лимиты CI.</p>
+<h3 id="3-papermill">3. papermill<a class="headerlink" href="#3-papermill" title="Permanent link">&para;</a></h3>
+<p>Параметризует ноутбуки: шаблон + разные параметры.</p>
+<p><strong>Плюсы</strong>: удобно для серий экспериментов, параметры сохраняются в метаданных, гибко.
+<strong>Минусы</strong>: Jupyter + papermill, кэширование вручную, растёт время сборки.
+<strong>Когда</strong>: серии однотипных экспериментов (гиперпараметры, кросс-валидация).</p>
+<h3 id="4-makefilenox">4. Скрипт + Makefile/nox<a class="headerlink" href="#4-makefilenox" title="Permanent link">&para;</a></h3>
+<p>Вычисления — обычным Python-скриптом. Читает CSV, строит графики и генерирует <code>.md</code>. Вызывается через <code>make figures</code> перед <code>mkdocs build</code>.</p>
+<p><strong>Плюсы</strong>: полная воспроизводимость, лёгкие зависимости (pandas + matplotlib), быстрая сборка, кэш через хеш, простая отладка, явная связь с версией данных и кода, укладывается в лимиты CI.
+<strong>Минусы</strong>: нет интерактивности Jupyter, надо писать генерацию <code>.md</code> самому.
+<strong>Когда</strong>: большинство случаев публикации результатов. <strong>Самый практичный подход.</strong></p>
+<h2 id="ci">Ограничения CI для тяжёлых вычислений<a class="headerlink" href="#ci" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Ограничение</th>
+<th>GitHub Actions</th>
+<th>GitVerse</th>
+<th>SourceCraft</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Лимит минут</td>
+<td>2000/мес (приватные), безлимит (публичные)</td>
+<td>1000/мес</td>
+<td>1000/мес</td>
+</tr>
+<tr>
+<td>Таймаут job</td>
+<td>6 часов</td>
+<td>1 час</td>
+<td>настраивается</td>
+</tr>
+<tr>
+<td>GPU</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Кэш</td>
+<td>до 10 ГБ</td>
+<td>1–5 ГБ</td>
+<td>1–5 ГБ</td>
+</tr>
+<tr>
+<td>Размер артефакта</td>
+<td>до 500 МБ</td>
+<td>до 100–500 МБ</td>
+<td>до 100–500 МБ</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Следствие</strong>: обучение модели в CI невозможно. Только лёгкие вычисления на CPU.</p>
+<h2 id="_5">Граница между стратегиями<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p><strong>Вычисления в CI</strong> — когда:
+- Данные маленькие (КБ–десятки МБ).
+- Вычисления секунды–минуты.
+- Нет GPU.
+- Результаты &lt; 500 МБ.</p>
+<p><strong>Вычисления отдельно, CI собирает из артефактов</strong> — когда:
+- Данные большие (&gt; 500 МБ).
+- Вычисления длительные (&gt; 10 минут).
+- Нужен GPU.
+- Жёсткие лимиты минут.</p>
+<p><strong>Гибрид</strong> (самый практичный): тяжёлые вычисления — локально или на своём сервере, результаты коммитятся. В CI — только построение графиков из готовых данных.</p>
+<h2 id="_6">Связь результата с версией кода и данных<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="1">1. Хеши датасетов<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">dataset_hash</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[:</span><span class="mi">8</span><span class="p">]</span>
+</code></pre></div>
+<p>На странице: <code>Версия данных: a3f5c1e8</code>. При изменении данных хеш меняется — видно, что результат устарел.</p>
+<h3 id="2_1">2. Версии датасетов<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<p>Хранить большие датасеты отдельно: DVC, Git LFS или Zenodo (с DOI). На странице — ссылка на конкретную версию.</p>
+<h3 id="3">3. Метаданные запуска<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p><code>run_metadata.json</code>, коммитится вместе с результатами:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">"commit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7f6f704"</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">"dataset_hash"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a3f5c1e8"</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="nt">"dataset_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"v1.0"</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"n_estimators"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="nt">"random_state"</span><span class="p">:</span><span class="w"> </span><span class="mi">42</span><span class="p">},</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="nt">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2026-09-17T14:32:00Z"</span><span class="p">,</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="nt">"python"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.13.5"</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="4">4. Отображение на странице<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>| Параметр | Значение |
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>|---|---|
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>| Коммит | 7f6f704 |
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>| Версия данных | v1.0 (a3f5c1e8) |
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>| Дата сборки | 2026-09-17 14:32 UTC |
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>| Параметры | n_estimators=100, random_state=42 |
+</code></pre></div>
+<p>Это требование задания Р3.</p>
+<h2 id="_7">Вывод<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p><strong>Оптимальный подход</strong> — генерация Markdown и CSV отдельным скриптом через <strong>Makefile</strong> или <strong>nox</strong>.</p>
+<p>Обоснование:
+1. Полная воспроизводимость: код и данные в репозитории.
+2. Лёгкие зависимости: Python + pandas + matplotlib.
+3. Быстрая сборка, не съедает лимиты CI.
+4. Кэш через хеш: не изменилось — пропускаем пересчёт.
+5. Явная связь с версией данных и кода.
+6. Простая отладка и тесты.
+7. Маленькие артефакты, короткие job.</p>
+<p><strong>Условия изменения</strong>:</p>
 <ol>
-<li><strong>Наилучшая поддержка научного контента</strong>: формулы LaTeX с amsmath, полноценная библиография через <code>sphinxcontrib-bibtex</code>, таблицы с объединением ячеек, исполняемые ноутбуки через <code>MyST-NB</code>.</li>
-<li><strong>Встроенное версионирование</strong>: <code>sphinx-multiversion</code> позволяет публиковать версии результатов.</li>
-<li><strong>Автодокументирование кода</strong>: <code>autodoc</code> извлекает документацию из docstrings.</li>
-<li><strong>Экспорт в PDF/LaTeX</strong>: встроенные билдеры для множественных представлений.</li>
-<li><strong>Зрелость и поддержка</strong>: активное сообщество, обширная документация, доступность через PyPI.</li>
-</ol>
-<h3 id="_7">Условия, при которых вывод меняется<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<ol>
-<li>
-<p><strong>Если требуется интерактивный контент с Plotly</strong>: <strong>Quarto</strong> может быть предпочтительнее, так как имеет встроенную поддержку интерактивных визуализаций без плагинов.</p>
-</li>
-<li>
-<p><strong>Если важна скорость сборки и простота</strong>: <strong>MkDocs + Material</strong> быстрее настраивается и собирается, подходит для небольших сайтов с базовыми формулами.</p>
-</li>
-<li>
-<p><strong>Если публикуется только блог без сложной математики</strong>: <strong>Pelican</strong> достаточен, но требует больше ручной работы для научного контента.</p>
-</li>
-<li>
-<p><strong>Если требуется тесная интеграция с Jupyter-ноутбуками</strong>: <strong>Quarto</strong> или <strong>Jupyter Book</strong> (на базе Sphinx) — лучший выбор.</p>
-</li>
+<li><strong>Уже есть ноутбуки</strong> → <strong>MyST-NB</strong> или <strong>nbconvert</strong>, но дороже по времени и зависимостям.</li>
+<li><strong>Серия экспериментов с параметрами</strong> → <strong>papermill</strong> (для скриптов достаточно <code>argparse</code>).</li>
+<li><strong>Однотипные эксперименты по шаблону</strong> → <strong>Quarto</strong> с <code>params</code> и <code>freeze</code>.</li>
+<li><strong>Тяжёлые вычисления (GPU, часы)</strong> → стратегия «вычисления отдельно, CI собирает из артефактов». Результаты коммитятся, CI только собирает сайт.</li>
 </ol>
 
 
