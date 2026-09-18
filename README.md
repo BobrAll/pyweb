@@ -6,8 +6,9 @@
  - https://bobrall.github.io/pyweb/
  - https://bobrall.gitverse.site/pyweb/
  - https://se.ifmo.ru/~s339795/pyweb/
+ - https://se.ifmo.ru/~s339795/pyweb/previews/test/ (ветка test)
 
-Стек: MkDocs + Material, GitHub Actions, Helios ИТМО.
+Стек: MkDocs + Material, Sphinx, GitHub/GitVerse Actions, Helios ИТМО.
 
 ## Лицензии
 
