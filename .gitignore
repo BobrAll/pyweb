@@ -2,6 +2,7 @@
 site/
 .build/
 sphinx/_build/
+_published/
 __pycache__/
 *.pyc
 .DS_Store

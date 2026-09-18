@@ -2,7 +2,7 @@ name: Deploy MkDocs
 
 on:
   push:
-    branches: [ '**' ]
+    branches: [ '**', '!gh-pages' ]
   workflow_dispatch:
     inputs:
       rollback:
@@ -19,7 +19,7 @@ on:
         default: latest
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -37,6 +37,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -52,19 +54,11 @@ jobs:
       - name: Run experiment pipeline
         run: python scripts/run_experiment.py
 
+      - name: Build Sphinx subsite
+        run: sphinx-build -b html -d sphinx/_build/doctrees sphinx sphinx/_build/html
+
       - name: Build site
         run: mkdocs build --strict
-
-      - name: Build Sphinx version
-        run: |
-          sphinx-build -b html sphinx sphinx/_build/html
-          rm -rf site/sphinx
-          cp -r sphinx/_build/html site/sphinx
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: site/
 
       - name: Upload artifact for Helios
         uses: actions/upload-artifact@v4
@@ -72,6 +66,36 @@ jobs:
           name: site
           path: site/
           retention-days: 1
+
+      - name: Configure git identity
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Deploy main build as version dev
+        if: github.ref == 'refs/heads/main'
+        run: |
+          set -euo pipefail
+          mike deploy --push --allow-empty --alias-type copy dev
+          if mike list latest >/dev/null 2>&1; then
+            mike set-default --push --allow-empty latest
+          else
+            mike set-default --push --allow-empty dev
+          fi
+          mike list
+
+      - name: Export published site
+        if: github.ref == 'refs/heads/main'
+        run: |
+          mkdir -p _published
+          git archive gh-pages | tar -x -C _published
+
+      - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _published/
 
   deploy:
     needs: build

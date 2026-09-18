@@ -15,10 +15,9 @@ fi
 .venv/bin/python scripts/run_experiment.py
 .venv/bin/python scripts/make_charts.py
 
+.venv/bin/sphinx-build -b html -d sphinx/_build/doctrees sphinx sphinx/_build/html
+
 .venv/bin/mkdocs build --strict
-.venv/bin/sphinx-build -b html sphinx sphinx/_build/html
-rm -rf site/sphinx
-cp -r sphinx/_build/html site/sphinx
 
 echo
 echo "MkDocs:       http://localhost:${PORT}/"
