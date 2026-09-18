@@ -1,7 +1,7 @@
 {
-  "commit": "a3906b6",
-  "build_date": "2026-09-18 17:18 \u041c\u0421\u041a",
-  "build_ts": "2026-09-18T17:18:53+03:00",
-  "dataset_version": "8ed87c2654fd",
+  "commit": "a844c34",
+  "build_date": "2026-09-18 19:02 \u041c\u0421\u041a",
+  "build_ts": "2026-09-18T19:02:06+03:00",
+  "dataset_version": "b84e102ed86d",
   "dataset_file": "data/experiment.csv"
 }
