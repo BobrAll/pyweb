@@ -7,6 +7,6 @@
 
 ## Стек
 
-- **Генератор**: MkDocs + тема Material
-- **CI/CD**: GitHub Actions + GitVerse/SourceCraft
-- **Хостинг**: GitHub Pages + Helios ИТМО
+- **Генератор**: MkDocs + тема Material, Sphinx
+- **CI/CD**: GitHub/GitVerse Actions
+- **Хостинг**: GitHub/GitVerse Pages + Helios ИТМО
