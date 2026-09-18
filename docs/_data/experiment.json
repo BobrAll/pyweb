@@ -1,19 +1,19 @@
 {
-  "A": 2.4306,
-  "tau": 4.0939,
+  "A": 2.4305,
+  "tau": 4.094,
   "r2": 0.9957,
   "residual_std": 0.06,
   "n_points": 13,
-  "amplitude_start": 2.5091,
+  "amplitude_start": 2.5094,
   "amplitude_end": 0.1264,
   "points": [
     {
       "t": 0.0,
-      "amplitude": 2.5091
+      "amplitude": 2.5094
     },
     {
       "t": 1.0,
-      "amplitude": 1.9158
+      "amplitude": 1.9154
     },
     {
       "t": 2.0,

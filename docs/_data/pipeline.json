@@ -1,9 +1,9 @@
 {
   "last_run": "cached",
   "data_changed": false,
-  "data_changed_at": "2026-09-17T21:27:50+03:00",
-  "fresh_seconds": 0.161,
-  "cached_seconds": 0.001,
-  "saved_percent": 99.4,
-  "dataset_version": "0bb0b4126578"
+  "data_changed_at": "2026-09-18T16:05:28+03:00",
+  "fresh_seconds": 0.156,
+  "cached_seconds": 0.004,
+  "saved_percent": 97.4,
+  "dataset_version": "8ed87c2654fd"
 }
